@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>เรียนรู้ | แบบทดสอบกล้องจุลทรรศน์</title>
+
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url(assets/background.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    font-family: 'IBMPlex', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+@font-face {
+    font-family: 'IBMPlex';
+    src: url('fonts/IBM.ttf') format('truetype');
+}
+
+/* Responsive White Box Container */
+.quiz-container {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto; /* Allows scrolling if content exceeds height */
+}
+
+.header-section {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.title {
+    font-family: 'IBMPlex', sans-serif;
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Single Capsule Outline Button */
+.btn-capsule {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #ffffff;
+    color: #6dafe1;
+    border: 2px solid #6dafe1;
+    border-radius: 50px;
+    font-family: 'IBMPlex', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-capsule:hover {
+    background-color: #6dafe1;
+    color: #ffffff;
+}
+
+/* Main Content Section */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Centered Image Container */
+.image-container {
+    text-align: center;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.microscope-img {
+    max-width: 100%;
+    max-height: 550px;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* How-To Guide Section */
+.guide-section {
+    width: 100%;
+    max-width: 800px;
+    text-align: left;
+    color: #34495e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.guide-title {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 12px;
+}
+
+.guide-steps {
+    padding-left: 20px;
+}
+
+.guide-steps li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Footer Section */
+.footer {
+    text-align: left;
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+/* Mobile Screen Adjustments */
+@media screen and (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+    .quiz-container {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+    .title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+    .btn-capsule {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 15px;
+    }
+    .microscope-img {
+        max-height: 400px;
+    }
+    .guide-title {
+        font-size: 18px;
+    }
+    .guide-steps li {
+        font-size: 14px;
+    }
+    .footer {
+        font-size: 11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+    <!-- Top-Left Header Section -->
+    <div class="header-section">
+        <h1 class="title">เรียนรู้เรื่องกล้องจุลทรรศน์</h1>
+        <a href="index.html" class="btn-capsule">กลับหน้าแรก</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="content">
+        <!-- Centered Image -->
+        <div class="image-container">
+            <img src="assets/partsOfMicroscope.png" alt="กล้องจุลทรรศน์" class="microscope-img" />
+        </div>
+
+        <!-- Microscope Operating Steps -->
+        <div class="guide-section">
+            <h2 class="guide-title">ขั้นตอนการใช้งานกล้องจุลทรรศน์</h2>
+            <ol class="guide-steps">
+                <li><strong>การวางกล้อง:</strong> วางกล้องจุลทรรศน์บนโต๊ะที่มั่นคง และหมุนเลนส์วัตถุกำลังขยายต่ำสุด (4x) ให้ตรงกับลำกล้อง</li>
+                <li><strong>การเปิดไฟ:</strong> เสียบปลั๊กและเปิดสวิตช์ไฟ ปรับไดอะแฟรม (Diaphragm) เพื่อเปิดให้แสงผ่านตามความเหมาะสม</li>
+                <li><strong>การวางสไลด์:</strong> นำสไลด์ตัวอย่างวางบนแท่นวางวัตถุ ใช้ที่หนีบสไลด์ยึดให้แน่น และปรับให้อยู่ตรงกลางแสง</li>
+                <li><strong>การหาภาพ:</strong> มองจากด้านข้าง ปรับปุ่มปรับภาพหยาบ (Coarse Adjustment) ให้แท่นวางวัตถุยกขึ้นใกล้เลนส์มากที่สุด</li>
+                <li><strong>การโฟกัสภาพ:</strong> มองผ่านเลนส์ตา ค่อยๆ หมุนปุ่มปรับภาพหยาบลงจนเริ่มเห็นภาพ แล้วใช้ปุ่มปรับภาพละเอียด (Fine Adjustment) เพื่อปรับให้ภาพคมชัด</li>
+                <li><strong>การเปลี่ยนกำลังขยาย:</strong> หากต้องการเพิ่มกำลังขยาย ให้หมุนจานหมุน (Revolving Nosepiece) ไปที่เลนส์กำลังขยายสูงขึ้น และใช้เฉพาะปุ่มปรับภาพละเอียดเท่านั้นในการโฟกัส</li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Footer Section -->
+    <div class="footer">
+        จัดทำโดย ด.ช. ภาณุพงษ์ รักบำรุง
+    </div>
+</div>
+
+</body>
+</html>

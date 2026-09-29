@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>แบบทดสอบ | แบบทดสอบกล้องจุลทรรศน์</title>
+
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url(assets/background.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    font-family: 'IBMPlex', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+@font-face {
+    font-family: 'IBMPlex';
+    src: url('fonts/IBM.ttf') format('truetype');
+}
+
+.quiz-container {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+}
+
+.header-section {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-family: 'IBMPlex', sans-serif;
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.btn-capsule {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #ffffff;
+    color: #6dafe1;
+    border: 2px solid #6dafe1;
+    border-radius: 50px;
+    font-family: 'IBMPlex', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-capsule:hover {
+    background-color: #6dafe1;
+    color: #ffffff;
+}
+
+/* Quiz Section */
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.quiz-card {
+    width: 100%;
+    text-align: left;
+}
+
+.progress-text {
+    font-size: 14px;
+    color: #6dafe1;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.question-text {
+    font-size: 20px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* Choices */
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 12px 18px;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: 'IBMPlex', sans-serif;
+    font-size: 16px;
+    color: #333333;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    border-color: #6dafe1;
+    background-color: #f4f9fd;
+}
+
+.option-btn.selected {
+    border-color: #6dafe1;
+    background-color: #6dafe1;
+    color: #ffffff;
+}
+
+.nav-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.footer {
+    text-align: left;
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    body { padding: 12px; }
+    .quiz-container { padding: 20px 15px; border-radius: 16px; }
+    .title { font-size: 22px; }
+    .question-text { font-size: 17px; }
+    .option-btn { font-size: 14px; padding: 10px 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+    <div class="header-section">
+        <h1 class="title">แบบทดสอบเรื่องกล้องจุลทรรศน์</h1>
+        <a href="index.html" class="btn-capsule">หน้าแรก</a>
+    </div>
+
+    <div class="content">
+        <div class="quiz-card">
+            <div id="progress" class="progress-text">ข้อที่ 1 / 20</div>
+            <div id="question" class="question-text">คำถามจะแสดงที่นี่...</div>
+            
+            <div id="options" class="options-list">
+                <!-- Choices generated dynamically by JS -->
+            </div>
+
+            <div class="nav-controls">
+                <button id="prev-btn" class="btn-capsule" onclick="prevQuestion()" style="visibility:hidden;">ข้อก่อนหน้า</button>
+                <button id="next-btn" class="btn-capsule" onclick="nextQuestion()">ข้อถัดไป</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        จัดทำโดย ด.ช. ภาณุพงษ์ รักบำรุง
+    </div>
+</div>
+
+<script type="text/javascript">
+// Sample 20 Questions Data Structure
+var questions = [
+    {
+        q: "1. ใครคือผู้คิดค้นกล้องจุลทรรศน์เลนส์เดี่ยวที่มีกำลังขยายสูงและส่องพบสิ่งมีชีวิตขนาดเล็กเป็นคนแรก?",
+        options: ["โรเบิร์ต ฮุก (Robert Hooke)", "แอนโทนี แวน ลีเวนฮุก (Antonie van Leeuwenhoek)", "แซคคาริแอส แจนเซน (Zacharias Janssen)", "กาลิเลโอ กาลิเลอี (Galileo Galilei)"],
+        answer: 1,
+        explanation: "แอนโทนี แวน ลีเวนฮุก ประดิษฐ์กล้องจุลทรรศน์เลนส์เดี่ยวคุณภาพสูงและส่องพบแบคทีเรียและโปรโตซัวเป็นคนแรก"
+    },
+    {
+        q: "2. ผู้ที่ค้นพบเซลล์ (Cell) จากการส่องไม้ก๊อกด้วยกล้องจุลทรรศน์ประกอบคือใคร?",
+        options: ["โรเบิร์ต ฮุก (Robert Hooke)", "ชาลส์ ดาร์วิน (Charles Darwin)", "หลุยส์ ปาสเตอร์ (Louis Pasteur)", "เกรเกอร์ เมนเดล (Gregor Mendel)"],
+        answer: 0,
+        explanation: "โรเบิร์ต ฮุก ส่องดูไม้ก๊อกในปี ค.ศ. 1665 และพบช่องว่างคล้ายห้องเล็กๆ จึงตั้งชื่อว่า 'Cell'"
+    },
+    {
+        q: "3. กล้องจุลทรรศน์ประกอบ (Compound Light Microscope) ใช้สิ่งใดเป็นแหล่งกำเนิดภาพ?",
+        options: ["ลำแสงอิเล็กตรอน", "แสงสว่างสังเคราะห์หรือแสงอาทิตย์", "รังสีเอ็กซ์", "คลื่นเสียงอัลตราซาวด์"],
+        answer: 1,
+        explanation: "กล้องจุลทรรศน์ใช้แสงแบบประกอบใช้แสงสว่างผ่านวัตถุและเลนส์เพื่อสร้างภาพ"
+    },
+    {
+        q: "4. หากเลนส์ใกล้ตามีกำลังขยาย 10x และเลนส์ใกล้วัตถุมีกำลังขยาย 40x กำลังขยายรวมของภาพคือเท่าใด?",
+        options: ["50 เท่า", "300 เท่า", "400 เท่า", "4000 เท่า"],
+        answer: 2,
+        explanation: "กำลังขยายรวม = กำลังขยายเลนส์ใกล้ตา × กำลังขยายเลนส์ใกล้วัตถุ (10 × 40 = 400 เท่า)"
+    },
+    {
+        q: "5. ส่วนประกอบใดทำหน้าที่ปรับปริมาณแสงที่เข้าสู่ลำกล้องและตัวอย่างบนสไลด์?",
+        options: ["ไดอะแฟรม (Diaphragm)", "เลนส์รวมแสง (Condenser)", "แท่นวางวัตถุ (Stage)", "ปุ่มปรับภาพหยาบ (Coarse Adjustment)"],
+        answer: 0,
+        explanation: "ไดอะแฟรมทำหน้าที่เป็นม่านเปิด-ปิดเพื่อควบคุมปริมาณแสงที่ส่องผ่านวัตถุ"
+    },
+    {
+        q: "6. เลนส์รวมแสง (Condenser) มีหน้าที่สำคัญอย่างไร?",
+        options: ["ขยายภาพให้ใหญ่ขึ้น", "รวบรวมแสงให้เข้มขึ้นและตรงไปยังวัตถุ", "ปรับระยะโฟกัสของภาพ", "ยึดสไลด์แก้วให้อยู่กับที่"],
+        answer: 1,
+        explanation: "Condenser รวบรวมลำแสงจากหลอดไฟให้โฟกัสไปที่สไลด์ตัวอย่างอย่างสม่ำเสมอ"
+    },
+    {
+        q: "7. เมื่อเริ่มต้นหาภาพจากกล้องจุลทรรศน์ ควรเริ่มใช้เลนส์ใกล้วัตถุกำลังขยายเท่าใดก่อนเสมอ?",
+        options: ["กำลังขยายต่ำสุด (4x หรือ 10x)", "กำลังขยายปานกลาง (20x)", "กำลังขยายสูง (40x)", "กำลังขยายสูงสุดใช้น้ำมัน (100x)"],
+        answer: 0,
+        explanation: "การเริ่มด้วยเลนส์กำลังขยายต่ำสุดช่วยให้หาตำแหน่งวัตถุได้ง่ายและป้องกันเลนส์ชนสไลด์"
+    },
+    {
+        q: "8. ปุ่มปรับภาพหยาบ (Coarse Adjustment Knob) มีไว้สำหรับใช้อย่างไร?",
+        options: ["ใช้เฉพาะเมื่อใช้เลนส์กำลังขยาย 100x", "ใช้ปรับหาภาพเมื่อใช้เลนส์กำลังขยายต่ำ", "ใช้เปลี่ยนสีของแสงไฟ", "ใช้หมุนเปลี่ยนเลนส์ใกล้วัตถุ"],
+        answer: 1,
+        explanation: "ปุ่มปรับภาพหยาบเคลื่อนที่แท่นวางวัตถุอย่างรวดเร็ว เหมาะสำหรับหาโฟกัสแรกในกำลังขยายต่ำ"
+    },
+    {
+        q: "9. เหตุใดจึงห้ามใช้ปุ่มปรับภาพหยาบเมื่อใช้เลนส์ใกล้วัตถุกำลังขยายสูง (40x หรือ 100x)?",
+        options: ["ภาพจะมืดเกินไป", "จะทำให้ไฟกล้องดับ", "สไลด์อาจชนกับเลนส์จนแตกหักเสียหายได้", "เลนส์จะหมุนหลุดออกจากกล้อง"],
+        answer: 2,
+        explanation: "เลนส์กำลังขยายสูงมีระยะทำงานใกล้สไลด์มาก การใช้ปุ่มปรับหยาบอาจดันสไลด์กระแทกเลนส์แตก"
+    },
+    {
+        q: "10. เมื่อต้องการปรับภาพให้ชัดเจนแจ่มชัดที่สุดในกำลังขยายสูง ควรใช้ปุ่มใด?",
+        options: ["ปุ่มปรับภาพหยาบ", "ปุ่มปรับภาพละเอียด (Fine Adjustment Knob)", "ปุ่มเลื่อนสไลด์", "ปุ่มปรับไฟ"],
+        answer: 1,
+        explanation: "ปุ่มปรับภาพละเอียดขยับแท่นวางวัตถุทีละน้อยมาก ใช้สำหรับโฟกัสภาพในกำลังขยายสูง"
+    },
+    {
+        q: "11. จานหมุนเลนส์ (Revolving Nosepiece) มีหน้าที่อะไร?",
+        options: ["ยึดและเปลี่ยนเลนส์ใกล้วัตถุกำลังขยายต่างๆ", "หมุนปรับปริมาณแสง", "หมุนเปลี่ยนเลนส์ใกล้ตา", "หมุนปรับความสูงของกล้อง"],
+        answer: 0,
+        explanation: "Revolving Nosepiece คือจานหมุนที่ใช้เลือกเปลี่ยนเลนส์ใกล้วัตถุตามกำลังขยายที่ต้องการ"
+    },
+    {
+        q: "12. ในการใช้เลนส์วัตถุกำลังขยาย 100x จะต้องใช้อุปกรณ์ตัวกลางใดหยดลงบนสไลด์?",
+        options: ["น้ำบริสุทธิ์", "แอลกอฮอล์", "น้ำมันหักเหแสง (Immersion Oil)", "น้ำส้มสายชู"],
+        answer: 2,
+        explanation: "Immersion Oil ช่วยลดการหักเหของแสงออกนอกเลนส์ ทำให้ได้ภาพที่ชัดเจนในกำลังขยาย 100x"
+    },
+    {
+        q: "13. เมื่อมองภาพตัวอย่างผ่านกล้องจุลทรรศน์ใช้แสง ภาพที่ปรากฏจะเป็นภาพชนิดใดเทียบกับวัตถุจริง?",
+        options: ["ภาพเสมือนหัวตั้งขนาดใหญ่กว่าวัตถุ", "ภาพจริงหัวกลับกลับซ้ายเป็นขวา", "ภาพเสมือนหัวกลับกลับซ้ายเป็นขวา", "ภาพจริงหัวตั้ง"],
+        answer: 2,
+        explanation: "เลนส์ของกล้องจุลทรรศน์ทำให้เกิดภาพเสมือนหัวกลับ และกลับทิศทางซ้าย-ขวาจากวัตถุจริง"
+    },
+    {
+        q: "14. หากเคลื่อนสไลด์แก้วไปทาง 'ซ้ายมือ' ภาพที่มองเห็นในกล้องจะเคลื่อนที่ไปทางใด?",
+        options: ["เคลื่อนไปทางซ้ายมือ", "เคลื่อนไปทางขวามือ", "เคลื่อนขึ้นด้านบน", "ไม่เคลื่อนที่"],
+        answer: 1,
+        explanation: "เนื่องจากกล้องกลับทิศทางภาพ เมื่อเลื่อนสไลด์ไปทางซ้าย ภาพในกล้องจะเลื่อนไปทางขวา"
+    },
+    {
+        q: "15. การย้ายและถือกล้องจุลทรรศน์ที่ถูกต้องและปลอดภัยที่สุดควรทำอย่างไร?",
+        options: ["จับที่ลำกล้องด้วยมือข้างเดียว", "มือหนึ่งจับที่แขนกล้อง (Arm) และอีกมือหนึ่งรองใต้ฐาน (Base)", "จับที่แท่นวางวัตถุสองมือ", "จับที่ลำกล้องและเลนส์ใกล้ตา"],
+        answer: 1,
+        explanation: "การจับแขนกล้องและประคองใต้ฐานช่วยรับน้ำหนักและป้องกันชิ้นส่วนกล้องหลุดร่วง"
+    },
+    {
+        q: "16. ชิ้นส่วนใดทำหน้าที่เป็นโครงสร้างหลักเชื่อมระหว่างเลนส์ใกล้ตากับเลนส์ใกล้วัตถุ?",
+        options: ["ฐานกล้อง (Base)", "ลำกล้อง (Body Tube)", "แขนกล้อง (Arm)", "แท่นวางวัตถุ (Stage)"],
+        answer: 1,
+        explanation: "ลำกล้อง (Body Tube) เป็นท่อเชื่อมต่อทางเดินแสงระหว่างเลนส์ใกล้ตาและเลนส์ใกล้วัตถุ"
+    },
+    {
+        q: "17. หากเลนส์กล้องจุลทรรศน์สกปรก ควรใช้วัตถุใดเช็ดทำความสะอาด?",
+        options: ["กระดาษชำระทั่วไป", "เสื้อนักเรียน", "กระดาษเช็ดเลนส์ (Lens Paper) เท่านั้น", "ผ้าไมโครไฟเบอร์เปียกน้ำ"],
+        answer: 2,
+        explanation: "ต้องใช้กระดาษเช็ดเลนส์เฉพาะเท่านั้นเพื่อป้องกันไม่ให้เลนส์เกิดรอยขีดข่วน"
+    },
+    {
+        q: "18. ในกรณีที่ภาพที่มองเห็นมืดเกินไป สิ่งแรกที่ควรปรับแก้ไขคืออะไร?",
+        options: ["เปลี่ยนเลนส์ใกล้วัตถุเป็นกำลังขยายสูงขึ้น", "ปรับเพิ่มแสงที่หลอดไฟหรือเปิดไดอะแฟรมกว้างขึ้น", "ใช้ปุ่มปรับภาพหยาบดึงขึ้น", "เช็ดเลนส์ด้วยน้ำ"],
+        answer: 1,
+        explanation: "ความสว่างปรับได้โดยตรงจากการปรับโวลต์ไฟหรือเปิดช่องรับแสงไดอะแฟรมให้กว้างขึ้น"
+    },
+    {
+        q: "19. สไลด์ตัวอย่างประเภท 'Wet Mount' หมายถึงการเตรียมสไลด์ลักษณะใด?",
+        options: ["สไลด์แห้งที่ย้อมสีเคมี", "สไลด์ถาวรที่เคลือบเรซิน", "การวางตัวอย่างในหยดน้ำหรือของเหลวแล้วปิดด้วยกระจกปิดสไลด์", "การนำตัวอย่างไปเผาไฟก่อนส่อง"],
+        answer: 2,
+        explanation: "Wet Mount คือการเตรียมสไลด์สดโดยวางวัตถุในหยดน้ำและปิดด้วย Coverslip"
+    },
+    {
+        q: "20. ข้อใดคือขั้นตอนที่ถูกต้องหลังจากใช้งานกล้องจุลทรรศน์เสร็จสิ้น?",
+        options: ["เปิดไฟทิ้งไว้และปรับเป็นกำลังขยาย 100x", "หมุนเลนส์เป็นกำลังขยายต่ำสุด ลดแท่นวางวัตถุต่ำสุด ปิดสวิตช์ไฟ และคลุมผ้า", "ถอดเลนส์แยกเก็บไว้ในกล่อง", "เช็ดเลนส์ด้วยแอลกอฮอล์เข้มข้นทุกครั้ง"],
+        answer: 1,
+        explanation: "หลังใช้งานเสร็จ ให้ปรับเลนส์ต่ำสุด เลื่อนแท่นลง ปิดไฟ ถอดปลั๊ก และคลุมผ้ากันฝุ่นเพื่อถนอมเครื่อง"
+    }
+];
+
+var currentIdx = 0;
+var userAnswers = new Array(questions.length).fill(null);
+
+function loadQuestion() {
+    var qData = questions[currentIdx];
+    document.getElementById("progress").innerHTML = "ข้อที่ " + (currentIdx + 1) + " / " + questions.length;
+    document.getElementById("question").innerHTML = qData.q;
+    
+    var optionsDiv = document.getElementById("options");
+    optionsDiv.innerHTML = "";
+    
+    for (var i = 0; i < qData.options.length; i++) {
+        var btn = document.createElement("button");
+        btn.className = "option-btn" + (userAnswers[currentIdx] === i ? " selected" : "");
+        btn.innerHTML = String.fromCharCode(65 + i) + ". " + qData.options[i];
+        btn.onclick = (function(index) {
+            return function() { selectOption(index); };
+        })(i);
+        optionsDiv.appendChild(btn);
+    }
+
+    document.getElementById("prev-btn").style.visibility = (currentIdx === 0) ? "hidden" : "visible";
+    document.getElementById("next-btn").innerHTML = (currentIdx === questions.length - 1) ? "ส่งแบบทดสอบ" : "ข้อถัดไป";
+}
+
+function selectOption(index) {
+    userAnswers[currentIdx] = index;
+    loadQuestion();
+}
+
+function prevQuestion() {
+    if (currentIdx > 0) {
+        currentIdx--;
+        loadQuestion();
+    }
+}
+
+function nextQuestion() {
+    if (userAnswers[currentIdx] === null) {
+        alert("กรุณาเลือกคำตอบก่อนไปข้อถัดไป");
+        return;
+    }
+    
+    if (currentIdx < questions.length - 1) {
+        currentIdx++;
+        loadQuestion();
+    } else {
+        finishQuiz();
+    }
+}
+
+function finishQuiz() {
+    // Save state to sessionStorage for result.html
+    sessionStorage.setItem("quizQuestions", JSON.stringify(questions));
+    sessionStorage.setItem("quizUserAnswers", JSON.stringify(userAnswers));
+    window.location.href = "result.html";
+}
+
+// Initial load
+loadQuestion();
+</script>
+
+</body>
+</html>

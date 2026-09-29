@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ผลการทดสอบ | แบบทดสอบกล้องจุลทรรศน์</title>
+
+<style type="text/css">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-image: url(assets/background.jpg);
+    background-repeat: repeat;
+    background-attachment: fixed;
+    font-family: 'IBMPlex', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+@font-face {
+    font-family: 'IBMPlex';
+    src: url('fonts/IBM.ttf') format('truetype');
+}
+
+.quiz-container {
+    background-color: rgba(255, 255, 255, 0.92);
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+}
+
+.header-section {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-family: 'IBMPlex', sans-serif;
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.btn-capsule {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #ffffff;
+    color: #6dafe1;
+    border: 2px solid #6dafe1;
+    border-radius: 50px;
+    font-family: 'IBMPlex', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-right: 8px;
+}
+
+.btn-capsule:hover {
+    background-color: #6dafe1;
+    color: #ffffff;
+}
+
+/* Score Summary Banner */
+.score-card {
+    background-color: #ffffff;
+    border: 2px solid #6dafe1;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.score-title {
+    font-size: 18px;
+    color: #34495e;
+    margin-bottom: 8px;
+}
+
+.score-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.score-percentage {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-top: 4px;
+}
+
+/* Detailed Results List */
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.result-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.result-item.correct-item {
+    border-left: 6px solid #2ecc71;
+}
+
+.result-item.wrong-item {
+    border-left: 6px solid #e74c3c;
+}
+
+.q-header {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.ans-text {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.user-ans {
+    color: #e74c3c;
+}
+
+.user-ans.is-correct {
+    color: #2ecc71;
+}
+
+.correct-ans {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+.explanation-box {
+    margin-top: 8px;
+    padding: 8px 12px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #555555;
+    line-height: 1.4;
+}
+
+.footer {
+    text-align: left;
+    font-size: 13px;
+    color: #7f8c8d;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    body { padding: 12px; }
+    .quiz-container { padding: 20px 15px; border-radius: 16px; }
+    .title { font-size: 22px; }
+    .score-number { font-size: 36px; }
+    .btn-capsule { font-size: 13px; padding: 6px 14px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+    <div class="header-section">
+        <h1 class="title">สรุปผลการทำแบบทดสอบ</h1>
+        <a href="test.html" class="btn-capsule">ทำแบบทดสอบอีกครั้ง</a>
+        <a href="index.html" class="btn-capsule">กลับหน้าแรก</a>
+    </div>
+
+    <!-- Score Overview -->
+    <div class="score-card">
+        <div class="score-title">คะแนนที่คุณได้</div>
+        <div id="score-text" class="score-number">0 / 20</div>
+        <div id="percentage-text" class="score-percentage">(0%)</div>
+    </div>
+
+    <!-- Questions Answer Breakdown -->
+    <div id="results-container" class="results-list">
+        <!-- Results generated dynamically by JS -->
+    </div>
+    
+    <div class="footer">
+        จัดทำโดย ด.ช. ภาณุพงษ์ รักบำรุง
+    </div>
+</div>
+
+<script type="text/javascript">
+// Retrieve saved data from test.html
+var storedQuestions = sessionStorage.getItem("quizQuestions");
+var storedAnswers = sessionStorage.getItem("quizUserAnswers");
+
+if (!storedQuestions || !storedAnswers) {
+    // Redirect back to test if no data stored
+    window.location.href = "test.html";
+} else {
+    var questions = JSON.parse(storedQuestions);
+    var userAnswers = JSON.parse(storedAnswers);
+    
+    var score = 0;
+    var container = document.getElementById("results-container");
+
+    for (var i = 0; i < questions.length; i++) {
+        var q = questions[i];
+        var uAns = userAnswers[i];
+        var isCorrect = (uAns === q.answer);
+        
+        if (isCorrect) {
+            score++;
+        }
+
+        var item = document.createElement("div");
+        item.className = "result-item " + (isCorrect ? "correct-item" : "wrong-item");
+
+        var userChoiceText = (uAns !== null) ? String.fromCharCode(65 + uAns) + ". " + q.options[uAns] : "ไม่ได้ตอบ";
+        var correctChoiceText = String.fromCharCode(65 + q.answer) + ". " + q.options[q.answer];
+
+        var html = '<div class="q-header">' + q.q + '</div>';
+        
+        if (isCorrect) {
+            html += '<div class="ans-text user-ans is-correct">&#10004; คำตอบของคุณ: ' + userChoiceText + '</div>';
+        } else {
+            html += '<div class="ans-text user-ans">&#10008; คำตอบของคุณ: ' + userChoiceText + '</div>';
+            html += '<div class="ans-text correct-ans">&#10004; คำตอบที่ถูกต้อง: ' + correctChoiceText + '</div>';
+        }
+        
+        html += '<div class="explanation-box"><strong>คำอธิบาย:</strong> ' + q.explanation + '</div>';
+
+        item.innerHTML = html;
+        container.appendChild(item);
+    }
+
+    // Display total score and percentage
+    document.getElementById("score-text").innerHTML = score + " / " + questions.length;
+    var percentage = Math.round((score / questions.length) * 100);
+    document.getElementById("percentage-text").innerHTML = "คิดเป็น " + percentage + "%";
+}
+</script>
+
+</body>
+</html>
